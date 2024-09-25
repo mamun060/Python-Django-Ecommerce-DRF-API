@@ -27,26 +27,37 @@
            <div class="col-12 col-xl-8">
              <div class="d-flex flex-column gap-4">
                <div class="card rounded-0 border">
-                 <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0 mb-3" alt="...">
+                {% if blog.thumbnail %}
+                  <img src="{{ blog.thumbnail.url }}" alt="{{ blog.title }}" class="card-img-top rounded-0 mb-3">
+                {% else %}
+                  <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0 mb-3" alt="...">
+                {% endif %}
                  <div class="card-body">
                    <div class="d-flex align-items-center gap-4">
                      <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
+                       <p class="mb-0"><i class="bi bi-person me-2"></i>
+                      Author: {{blog.author.name}}
+                      </p>
                      </div>
-                     <div class="posted-by">
+                     <!-- <div class="posted-by">
                        <p class="mb-0"><i class="bi bi-chat me-2"></i>18 Comments</p>
-                     </div>
-                     <div class="posted-date">
+                     </div> -->
+                     <!-- <div class="posted-date">
                        <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                      </div>
+                      </div> -->
                    </div>
-                   <h4 class="card-title fw-bold mt-3">Blog title here</h4>
-                   <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                   <h4 class="card-title fw-bold mt-3">
+                    {{ blog.title }}
+                   </h4>
+                   <p class="mb-0">
+                    {{ blog.subtitle }}
+                   </p>
                    <br>
-                   <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                   <p>Nullam non felis odio. Praesent aliquam magna est, nec volutpat quam aliquet non. Cras ut lobortis massa, a fringilla dolor. Quisque ornare est at felis consectetur mollis. Aliquam vitae metus et enim posuere ornare. Praesent sapien erat, pellentesque quis sollicitudin eget, imperdiet bibendum magna. Aenean sit amet odio est.</p>
+                   <p>
+                    {{blog.description}}
+                   </p>
                  
-                   <div class="d-flex align-items-center gap-3 py-3 border-top border-bottom">
+                   <!-- <div class="d-flex align-items-center gap-3 py-3 border-top border-bottom">
                      <div class="">
                        <h5 class="mb-0 fw-bold">Share This Post</h5>
                      </div>
@@ -59,14 +70,14 @@
                           <a href="javascript:;"><i class="bi bi-instagram"></i></a>
                         </div>
                      </div>
-                   </div>
-                   <div class="author d-flex align-items-start gap-3 my-3">
+                   </div> -->
+                   <!-- <div class="author d-flex align-items-start gap-3 my-3">
                      <img src="assets/images/avatars/01.html" class="" alt="" width="80">
                      <div class="">
                        <h6 class="mb-0">Jhon Doe</h6>
                        <p class="mb-0">Donec egestas metus non vehicula accumsan. Pellentesque sit amet tempor nibh. Mauris in risus lorem. Cras malesuada gravida massa eget viverra.</p>
                      </div>
-                   </div>
+                   </div> -->
                    <hr>
                    <div class="reply-form p-4 border">
                      <h5 class="mb-0 fw-bold">Leave a Reply</h5>

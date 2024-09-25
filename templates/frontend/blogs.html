@@ -16,72 +16,61 @@
      </div>
     </div>
     <!--end breadcrumb-->
- 
+
+    <!-- <h1>All Blogs</h1>
+
+    <ul>
+      {% for blog in blogs %}
+        <li>
+          <strong>{{ blog.title }}</strong> <br>
+           by {{ blog.author.name }} <br>
+          <p>{{ blog.description }}</p>
+        </li>
+      {% endfor %}
+    </ul> -->
  
     <!--start product details-->
     <section class="section-padding">
      <div class="container">
-       
          <div class="row g-4">
            <div class="col-12 col-xl-8">
              <div class="d-flex flex-column gap-4">
+
+              <!-- blog post card -->
+               {% for blog in blogs %}
                <div class="card rounded-0">
-                 <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0" alt="...">
+                {% if blog.thumbnail %}
+                  <img src="{{ blog.thumbnail.url }}" alt="{{ blog.title }}" class="card-img-top rounded-0">
+                {% else %}
+                  <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0" alt="...">
+                {% endif %}
                  <div class="card-body">
                    <div class="d-flex align-items-center gap-4">
                      <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
+                        <p class="mb-0"><i class="bi bi-person me-2"></i>
+                          Author: {{blog.author.name}}
+                        </p>
                      </div>
-                     <div class="posted-by">
+                     <!-- <div class="posted-by">
                        <p class="mb-0"><i class="bi bi-chat me-2"></i>18 Comments</p>
-                     </div>
-                     <div class="posted-date">
+                     </div> -->
+                     <!-- <div class="posted-date">
                        <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                      </div>
+                      </div> -->
                    </div>
-                   <h4 class="card-title fw-bold mt-3">Blog title here</h4>
-                   <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                   <a href="{% url 'blog-details' %}" class="btn btn-dark btn-ecomm mt-3">Read More</a>
+                   <h4 class="card-title fw-bold mt-3">
+                      {{ blog.title}}
+                   </h4>
+                   <p class="mb-0">
+                      {{blog.subtitle}}
+                   </p>
+                   <a href="{% url 'blog-details' blog.id %}" class="btn btn-dark btn-ecomm mt-3">Read More</a>
                  </div>
                </div>
-               <div class="card rounded-0">
-                 <img src="{% static 'frontend/assets/images/blog/02.webp' %}" class="card-img-top rounded-0" alt="...">
-                 <div class="card-body">
-                   <div class="d-flex align-items-center gap-4">
-                     <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
-                     </div>
-                     <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-chat me-2"></i>18 Comments</p>
-                     </div>
-                     <div class="posted-date">
-                       <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                      </div>
-                   </div>
-                   <h4 class="card-title fw-bold mt-3">Blog title here</h4>
-                   <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                   <a href="{% url 'blog-details' %}" class="btn btn-dark btn-ecomm mt-3">Read More</a>
-                 </div>
-               </div>
-               <div class="card rounded-0">
-                 <img src="{% static 'frontend/assets/images/blog/03.webp' %}" class="card-img-top rounded-0" alt="...">
-                 <div class="card-body">
-                   <div class="d-flex align-items-center gap-4">
-                     <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
-                     </div>
-                     <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-chat me-2"></i>18 Comments</p>
-                     </div>
-                     <div class="posted-date">
-                       <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                      </div>
-                   </div>
-                   <h4 class="card-title fw-bold mt-3">Blog title here</h4>
-                   <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                   <a href="{% url 'blog-details' %}" class="btn btn-dark btn-ecomm mt-3">Read More</a>
-                 </div>
-               </div>
+               {% endfor %}
+               <!-- blog post card end -->
+          
+
              </div>
            </div>
            <div class="col-12 col-xl-4">

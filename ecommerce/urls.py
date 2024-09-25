@@ -12,7 +12,7 @@ urlpatterns = [
     path('about-us', frontend_views.about_us, name="about-us"),
     path('contact-us',frontend_views.contact, name="contact-us"),
     path('blogs', frontend_views.blogs, name="blogs"),
-    path('blog-details', frontend_views.blog_details, name="blog-details"),
+    path('blog/<int:id>', frontend_views.blog_details, name="blog-details"),
     path('cart', frontend_views.cart, name="cart"),
     path('wishlist', frontend_views.wishlist, name="wishlist"),
 

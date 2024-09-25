@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
+from backend.models import Blog
 
 #Here is include frontend views
 def home(request):
@@ -17,10 +18,14 @@ def contact(request):
     return render(request, 'frontend/contact.html')
 
 def blogs(request):
-    return render(request, 'frontend/blogs.html')
+    allblogs = Blog.objects.select_related('author').all()
+    return render(request, 'frontend/blogs.html', {
+        'blogs': allblogs
+    })
 
-def blog_details(request):
-    return render(request, 'frontend/blog-details.html')
+def blog_details(request , id):
+    blog = get_object_or_404(Blog, id=id)
+    return render(request, 'frontend/blog-details.html', {'blog': blog})
 
 def cart(request):
     return render(request, 'frontend/cart.html')
