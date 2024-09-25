@@ -57,5 +57,21 @@ my_project/
 └── requirements.txt           # Project dependencies
 ```
 
-### Dynamic url path
+### Static - for load asset file
 ```python
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# media file load 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+```
+
+### In Django ImageField requires the pillow library
+``` python
+python -m pip install Pillow
+```
+
+
