@@ -43,8 +43,6 @@ $(function() {
     }).addClass("active").parent().addClass("active"); o.is("li");) o = o.parent("").addClass("show").parent("").addClass("active")
 })
 
-
-
 });
 
 

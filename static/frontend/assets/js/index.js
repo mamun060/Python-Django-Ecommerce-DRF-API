@@ -3,7 +3,6 @@
 $(function() {
 	"use strict";
 
-
 // slider
 
 $(document).ready(function(){
@@ -48,11 +47,6 @@ $(document).ready(function(){
 
 });
 
-
-
-
-
-
 $(document).ready(function(){
   $('.cartegory-box').slick({
      dots: false,
@@ -95,10 +89,6 @@ $(document).ready(function(){
  
  });
   
-
-
-
-
 });
 
 

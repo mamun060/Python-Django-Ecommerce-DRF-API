@@ -1,4 +1,4 @@
-### the best folder structure for Django app
+### The best folder structure for Django app
 
 ```python
 my_project/
@@ -56,3 +56,6 @@ my_project/
 ├── manage.py
 └── requirements.txt           # Project dependencies
 ```
+
+### Dynamic url path
+```python
