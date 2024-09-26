@@ -7,6 +7,6 @@ class Review(models.Model):
     review_text = models.TextField()
     userID = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='reviews')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-
+    
     def __str__(self):
         return f"Review for {self.product.product_title} by {self.userID.name}: {self.review_text[:20]}"

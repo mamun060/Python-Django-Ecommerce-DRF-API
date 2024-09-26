@@ -49,40 +49,42 @@
                    <h4 class="card-title fw-bold mt-3">
                     {{ blog.title }}
                    </h4>
-                   <p class="mb-0">
-                    {{ blog.subtitle }}
-                   </p>
+                   <p class="mb-0"> {{ blog.subtitle }}</p>
                    <br>
-                   <p>
-                    {{blog.description}}
-                   </p>
+                   <p>{{blog.description}}</p>
                  
-                   <!-- <div class="d-flex align-items-center gap-3 py-3 border-top border-bottom">
-                     <div class="">
-                       <h5 class="mb-0 fw-bold">Share This Post</h5>
-                     </div>
-                     <div class="footer-widget-9">
-                        <div class="social-link d-flex flex-wrap align-items-center gap-2">
-                          <a href="javascript:;"><i class="bi bi-facebook"></i></a>
-                          <a href="javascript:;"><i class="bi bi-twitter"></i></a>
-                          <a href="javascript:;"><i class="bi bi-linkedin"></i></a>
-                          <a href="javascript:;"><i class="bi bi-youtube"></i></a>
-                          <a href="javascript:;"><i class="bi bi-instagram"></i></a>
-                        </div>
-                     </div>
-                   </div> -->
-                   <!-- <div class="author d-flex align-items-start gap-3 my-3">
-                     <img src="assets/images/avatars/01.html" class="" alt="" width="80">
-                     <div class="">
-                       <h6 class="mb-0">Jhon Doe</h6>
-                       <p class="mb-0">Donec egestas metus non vehicula accumsan. Pellentesque sit amet tempor nibh. Mauris in risus lorem. Cras malesuada gravida massa eget viverra.</p>
-                     </div>
-                   </div> -->
+
                    <hr>
+                   <div class="author d-flex align-items-start flex-column gap-3 my-3">
+                      {% if comments %}
+                        <h5 class="mb-0 fw-bold">Comments ({{ comments.count }})</h5>
+                          <ul class="comment-list">
+                              {% for comment in comments %}
+                                  <div>
+                                      <h5 class="mb-0 fw-bold">Name: <span>{{ comment.name }} </span></h5>
+                                      <p><strong>Comment:</strong> {{ comment.comment }}</p>
+                                  </div>
+                              {% endfor %}
+                          </ul>
+                      {% else %}
+                          <p>No comments yet. Be the first to comment!</p>
+                      {% endif %}
+                  </div>
+                   <hr>
+                   <!-- Comment Form -->
                    <div class="reply-form p-4 border">
+                    {% if new_comment %}
+                        <p>Your comment has been added!</p>
+                    {% endif %}
                      <h5 class="mb-0 fw-bold">Leave a Reply</h5>
                      <p>Your email address will not be published. Required fields are marked *</p>
-                     <form>
+
+                    <form method="POST">
+                      {% csrf_token %}
+                      {{ comment_form.as_p }}
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                     <!-- <form>
                        <div class="mb-3">
                          <label class="form-label">Comment</label>
                          <textarea class="form-control rounded-0" rows="4"></textarea>
@@ -102,12 +104,16 @@
                        <div class="mb-0">
                          <button type="button" class="btn btn-dark btn-ecomm">Post Comment</button>
                        </div>
-                     </form>
+                     </form> -->
                    </div>
+                   <!-- end comment form-->
+
                  </div>
                </div>
              </div>
            </div>
+
+           <!-- right side of the page -->
            <div class="col-12 col-xl-4">
              <div class="blog-left-sidebar border p-4">
                <form>
@@ -185,6 +191,7 @@
                </form>
              </div>
            </div>
+           <!-- end right side of the page -->
          </div><!--end row-->
         
      </div>

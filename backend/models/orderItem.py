@@ -7,6 +7,6 @@ class OrderItem(models.Model):
     size = models.CharField(max_length=50)  # Size of the product
     color = models.CharField(max_length=50)  # Color of the product
     quantity = models.PositiveIntegerField()  # Quantity of the product
-
+    
     def __str__(self):
         return f"{self.quantity} x {self.product.product_title} (Size: {self.size}, Color: {self.color})"

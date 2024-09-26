@@ -15,146 +15,49 @@
        </nav>
      </div>
     </div>
-    <!--end breadcrumb-->
 
-    <!-- <h1>All Blogs</h1>
-
-    <ul>
-      {% for blog in blogs %}
-        <li>
-          <strong>{{ blog.title }}</strong> <br>
-           by {{ blog.author.name }} <br>
-          <p>{{ blog.description }}</p>
-        </li>
-      {% endfor %}
-    </ul> -->
  
-    <!--start product details-->
+    <!--start blog-->
     <section class="section-padding">
-     <div class="container">
-         <div class="row g-4">
-           <div class="col-12 col-xl-8">
-             <div class="d-flex flex-column gap-4">
+      <div class="container">
+        <div class="text-center pb-3">
+          <h3 class="mb-0 fw-bold">Latest Blog</h3>
+          <p class="mb-0 text-capitalize">Check our latest news</p>
+        </div>
+        <div class="blog-cards">
+          <div class="row row-cols-1 row-cols-lg-3 g-4">
 
-              <!-- blog post card -->
-               {% for blog in blogs %}
-               <div class="card rounded-0">
+            {% for blog in blogs %}
+            <div class="col">
+              <div class="card">
                 {% if blog.thumbnail %}
                   <img src="{{ blog.thumbnail.url }}" alt="{{ blog.title }}" class="card-img-top rounded-0">
                 {% else %}
                   <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0" alt="...">
                 {% endif %}
-                 <div class="card-body">
-                   <div class="d-flex align-items-center gap-4">
-                     <div class="posted-by">
-                        <p class="mb-0"><i class="bi bi-person me-2"></i>
-                          Author: {{blog.author.name}}
-                        </p>
-                     </div>
-                     <!-- <div class="posted-by">
-                       <p class="mb-0"><i class="bi bi-chat me-2"></i>18 Comments</p>
-                     </div> -->
-                     <!-- <div class="posted-date">
-                       <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                      </div> -->
-                   </div>
-                   <h4 class="card-title fw-bold mt-3">
-                      {{ blog.title}}
-                   </h4>
-                   <p class="mb-0">
-                      {{blog.subtitle}}
-                   </p>
-                   <a href="{% url 'blog-details' blog.id %}" class="btn btn-dark btn-ecomm mt-3">Read More</a>
-                 </div>
-               </div>
-               {% endfor %}
-               <!-- blog post card end -->
-          
+                <div class="card-body">
+                  <div class="d-flex align-items-center gap-4">
+                    <div class="posted-by">
+                      <p class="mb-0"><i class="bi bi-person me-2"></i>{{blog.author.name}}</p>
+                    </div>
+                    <div class="posted-date">
+                      <p class="mb-0"><i class="bi bi-calendar me-2"></i>{{blog.creted_at}}</p>
+                    </div>
+                  </div>
+                  <h5 class="card-title fw-bold mt-3">{{ blog.title}}</h5>
+                  <p class="mb-0">{{blog.subtitle}}</p>
+                  <a href="{% url 'blog-details' blog.slug %}" class="btn btn-outline-dark btn-ecomm mt-3">Read More</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
 
-             </div>
-           </div>
-           <div class="col-12 col-xl-4">
-             <div class="blog-left-sidebar border p-4">
-               <form>
-                 <div class="position-relative mb-4">
-                   <input type="text" class="form-control form-control-lg ps-5 rounded-0" placeholder="Search Product...">
-                   <span class="position-absolute top-50 product-show translate-middle-y"><i class="bi bi-search ms-3"></i></span>
-                 </div>
-                 <div class="blog-categories mb-4">
-                   <h5 class="mb-3 fw-bold">Blog Categories</h5>
-                   <div class="list-group list-group-flush"> <a href="javascript:;" class="list-group-item bg-transparent"><i class="bi bi-chevron-right me-1"></i> Fashion</a>
-                     <a href="javascript:;" class="list-group-item bg-transparent"><i class="bi bi-chevron-right me-1"></i> Electronis</a>
-                     <a href="javascript:;" class="list-group-item bg-transparent"><i class="bi bi-chevron-right me-1"></i> Accessories</a>
-                     <a href="javascript:;" class="list-group-item bg-transparent"><i class="bi bi-chevron-right me-1"></i> Kitchen &amp; Table</a>
-                     <a href="javascript:;" class="list-group-item bg-transparent"><i class="bi bi-chevron-right me-1"></i> Furniture</a>
-                   </div>
-                 </div>
-                 <div class="blog-categories recent-post mb-4">
-                   <h5 class="mb-4 fw-bold">Recent Posts</h5>
-                   <div class="d-flex align-items-start">
-                     <img src="{% static 'frontend/assets/images/blog/01.webp' %}" width="100" alt="">
-                     <div class="ms-3"> <a href="javascript:;" class="fs-6 fw-bold text-content">Post title here</a>
-                       <p class="mb-0">March 15, 2021</p>
-                     </div>
-                   </div>
-                   <div class="my-3 border-bottom"></div>
-                   <div class="d-flex align-items-start">
-                     <img src="{% static 'frontend/assets/images/blog/02.webp' %}" width="100" alt="">
-                     <div class="ms-3"> <a href="javascript:;" class="fs-6 fw-bold text-content">Post title here</a>
-                       <p class="mb-0">March 15, 2021</p>
-                     </div>
-                   </div>
-                   <div class="my-3 border-bottom"></div>
-                   <div class="d-flex align-items-start">
-                     <img src="{% static 'frontend/assets/images/blog/03.webp' %}" width="100" alt="">
-                     <div class="ms-3"> <a href="javascript:;" class="fs-6 fw-bold text-content">Post title here</a>
-                       <p class="mb-0">March 15, 2021</p>
-                     </div>
-                   </div>
-                 </div>
-                 <div class="blog-categories">
-                   <h5 class="mb-4 fw-bold">Popular Tags</h5>
-                   <div class="tags-box d-flex flex-wrap gap-3">
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Cloths</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Electronis</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Furniture</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Laptops</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Men Wear</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Shoes</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Topwear</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Formal Shirts</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Headphones</a>
-                     </div>
-                     <div>
-                       <a href="javascript:;" class="btn btn-outline-dark rounded-0 btn-ecomm">Bottom Wear</a>
-                     </div>
-                   </div>
-                 </div>
-               </form>
-             </div>
-           </div>
-         </div><!--end row-->
-        
-     </div>
-   </section>
-    <!--start product details-->
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+    </section>
+    <!--end blog -->
  
  
   </div>
