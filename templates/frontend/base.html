@@ -19,6 +19,9 @@
   <link href="{% static 'frontend/assets/css/style.css' %}" rel="stylesheet">
   <link href="{% static 'frontend/assets/css/dark-theme.css' %}" rel="stylesheet">
 
+  {% block extra_css %}
+  {% endblock %}
+
   <title>{% block title %} Shopingo - eCommerce HTML Template {% endblock %}</title>
 </head>
 
@@ -542,13 +545,15 @@
 
 
   <!-- JavaScript files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="{% static 'frontend/assets/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'frontend/assets/js/jquery.min.js' %}"></script>
   <script src="{% static 'frontend/assets/plugins/slick/slick.min.js' %}"></script>
   <script src="{% static 'frontend/assets/js/main.js' %}"></script>
   <script src="{% static 'frontend/assets/js/index.js' %}"></script>
   <script src="{% static 'frontend/assets/js/loader.js' %}"></script>
-
+  {% block extra_js %}{% endblock %}
+  
 </body>
 
 </html>

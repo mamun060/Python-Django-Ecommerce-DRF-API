@@ -75,6 +75,11 @@ python -m pip install Pillow
 ```
 
 
+### If you need some extra css or js file load for page wise different css and js file 
+```python
+{% block extra_js %} {% endblock %}
+```
+
 ### Django admin Dashboard manage like list_display, filter, pagination, search
 ```python
 class commentAdmin(admin.ModelAdmin):
