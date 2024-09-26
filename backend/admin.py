@@ -3,7 +3,7 @@ from .models import Category, Customer, Profile, Review, Product, Order, OrderIt
 
 # Register your models here.
 class categoryAdmin(admin.ModelAdmin):
-    list_display = ("category_name", "description" , "category_thumbnail")
+    list_display = ("category_name", "description" , "category_thumbnail" , "created_at")
 admin.site.register(Category, categoryAdmin)
 
 admin.site.register(Customer)
@@ -26,7 +26,7 @@ class commentAdmin(admin.ModelAdmin):
     list_filter = ('post_id',)  # Add filtering by post
     search_fields = ('name', 'email', 'comment')  # Enable search
     list_per_page = 10
-    
+
     # Define a method to display the post title
     def get_post_title(self, obj):
         return obj.post.title 

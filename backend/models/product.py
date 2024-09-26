@@ -12,6 +12,7 @@ class Product(models.Model):
     size = models.JSONField()  # Store multiple size options
     product_thumbnail = models.ImageField(upload_to='product_thumbnails/')
     product_gallery = models.JSONField()  # Store multiple image URLs for the gallery
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.product_title
