@@ -1,10 +1,14 @@
 from django.shortcuts import render , get_object_or_404 , redirect
-from backend.models import Blog , Comment
+from backend.models import Blog , Comment, Category
 from backend.forms import CommentForm
+
 
 #Here is include frontend views
 def home(request):
-    return render(request, 'frontend/home.html')
+    categories = Category.objects.all() 
+    return render(request, 'frontend/home.html',{
+        "categories": categories
+    })
 
 def shop(request):
     return render(request, 'frontend/shop.html')

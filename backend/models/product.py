@@ -11,7 +11,7 @@ class Product(models.Model):
     color = models.JSONField()  # Store multiple color options
     size = models.JSONField()  # Store multiple size options
     product_thumbnail = models.ImageField(upload_to='product_thumbnails/')
-    product_gallery = models.JSONField()  # Store multiple image URLs for the gallery
+    product_gallery = models.FileField(upload_to="proudct_gallery/")  # Store multiple image URLs for the gallery
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

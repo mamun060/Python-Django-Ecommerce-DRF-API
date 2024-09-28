@@ -1341,85 +1341,26 @@
           <p class="mb-0 text-capitalize">Select your favorite categories and purchase</p>
         </div>
         <div class="cartegory-box">
-          <a href="shop-grid-type-4.html">
+          {% for category in categories %}
+          <a href="{% url 'shop' %}">
             <div class="card">
               <div class="card-body">
                 <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/01.webp' %}" class="card-img-top rounded-0" alt="...">
+                  {% if category.thumbnail %}
+                    <img src="{{ category.thumbnail.url }}" class="card-img-top rounded-0" alt="{{ category.category_name }}">
+                  {% else %}
+                    <img src="{% static 'frontend/assets/images/categories/01.webp' %}" class="card-img-top rounded-0" alt="...">
+                  {% endif %}
+                  <!-- <img src="/media/category_thumbnail/01.webp" alt="..."> -->
                 </div>
                 <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Kurtas</h5>
-                  <h6 class="mb-0 product-number fw-bold">856 Products</h6>
+                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">{{ category.category_name}}</h5>
+                  <!-- <h6 class="mb-0 product-number fw-bold">856 Products</h6> -->
                 </div>
               </div>
             </div>
           </a>
-          <a href="shop-grid-type-4.html">
-            <div class="card">
-              <div class="card-body">
-                <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/02.webp' %}"  class="card-img-top rounded-0" alt="...">
-                </div>
-                <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Heels</h5>
-                  <h6 class="mb-0 product-number fw-bold">169 Products</h6>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="shop-grid-type-4.html">
-            <div class="card">
-              <div class="card-body">
-                <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/03.webp' %}"  class="card-img-top rounded-0" alt="...">
-                </div>
-                <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Lehenga</h5>
-                  <h6 class="mb-0 product-number fw-bold">589 Products</h6>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="shop-grid-type-4.html">
-            <div class="card">
-              <div class="card-body">
-                <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/04.webp' %}"  class="card-img-top rounded-0" alt="...">
-                </div>
-                <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Plazzos</h5>
-                  <h6 class="mb-0 product-number fw-bold">278 Products</h6>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="shop-grid-type-4.html">
-            <div class="card">
-              <div class="card-body">
-                <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/05.webp' %}"  class="card-img-top rounded-0" alt="...">
-                </div>
-                <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Makeup</h5>
-                  <h6 class="mb-0 product-number fw-bold">985 Products</h6>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="shop-grid-type-4.html">
-            <div class="card">
-              <div class="card-body">
-                <div class="overflow-hidden">
-                  <img src="{% static  'frontend/assets/images/categories/06.webp' %}"  class="card-img-top rounded-0" alt="...">
-                </div>
-                <div class="text-center">
-                  <h5 class="mb-1 cartegory-name mt-3 fw-bold">Shoes</h5>
-                  <h6 class="mb-0 product-number fw-bold">489 Products</h6>
-                </div>
-              </div>
-            </div>
-          </a>
-
+          {% endfor %}
         </div>
       </div>
     </section>
@@ -1444,45 +1385,6 @@
       </div>
     </section>
     <!--subscribe banner-->
-
-
-    <!--start blog-->
-    <section class="section-padding">
-      <div class="container">
-        <div class="text-center pb-3">
-          <h3 class="mb-0 fw-bold">Latest Blog</h3>
-          <p class="mb-0 text-capitalize">Check our latest news</p>
-        </div>
-        <div class="blog-cards">
-          <div class="row row-cols-1 row-cols-lg-3 g-4">
-            
-            <div class="col">
-              <div class="card">
-                <img src="{% static 'frontend/assets/images/blog/01.webp' %}" class="card-img-top rounded-0" alt="...">
-                <div class="card-body">
-                  <div class="d-flex align-items-center gap-4">
-                    <div class="posted-by">
-                      <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
-                    </div>
-                    <div class="posted-date">
-                      <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                    </div>
-                  </div>
-                  <h5 class="card-title fw-bold mt-3">Blog title here</h5>
-                  <p class="mb-0">Some quick example text to build on the card title and make.</p>
-                  <a href="blog-read.html" class="btn btn-outline-dark btn-ecomm mt-3">Read More</a>
-                </div>
-              </div>
-            </div>
-            
-
-          </div>
-          <!--end row-->
-        </div>
-      </div>
-    </section>
-    <!--end blog-->
-
 
   </div>
   <!--end page content-->
