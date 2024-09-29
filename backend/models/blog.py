@@ -9,7 +9,7 @@ class Blog(models.Model):
     sub_title = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='blog_thumbnails/', null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True) 
 
     def save(self, *args, **kwargs):
         if not self.slug:

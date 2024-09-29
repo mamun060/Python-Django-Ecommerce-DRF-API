@@ -5,22 +5,6 @@
 <!--start page content-->
 <div class="page-content">
 
-
-    <!--start breadcrumb-->
-    <div class="py-4 border-bottom">
-     <div class="container">
-       <nav aria-label="breadcrumb">
-         <ol class="breadcrumb mb-0"> 
-           <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-           <li class="breadcrumb-item"><a href="javascript:;">Authentication</a></li>
-           <li class="breadcrumb-item active" aria-current="page">Login</li>
-         </ol>
-       </nav>
-     </div>
-    </div>
-    <!--end breadcrumb-->
- 
- 
     <!--start product details-->
     <section class="section-padding">
      <div class="container">
@@ -47,7 +31,15 @@
                    <p class="mb-0 fw-bold">Or</p>
                    <div class="line"></div>
                  </div>
-                  <form>
+
+                 <form method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit">Login</button>
+                </form>
+
+
+                  <!-- <form>
                      <div class="row g-4">
                        <div class="col-12">
                            <label for="exampleUsername" class="form-label">Username</label>
@@ -67,10 +59,14 @@
                          <button type="button" class="btn btn-dark rounded-0 btn-ecomm w-100">Login</button>
                        </div>
                        <div class="col-12 text-center">
-                         <p class="mb-0 rounded-0 w-100">Don't have an account? <a href="javascript:;" class="text-danger">Sign Up</a></p>
+                         <p class="mb-0 rounded-0 w-100">Don't have an account? <a href="{% url 'customer-register' %}" class="text-danger">Sign Up</a></p>
                        </div>
-                     </div><!---end row-->
-                  </form>
+                     </div>
+                  </form> -->
+
+                  <div class="col-12 text-center pt-4">
+                    <p class="mb-0 rounded-0 w-100">Don't have an account? <a href="{% url 'customer-register' %}" class="text-danger">Sign Up</a></p>
+                  </div>
                 </div>
               </div>
            </div>

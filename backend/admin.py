@@ -1,42 +1,51 @@
 from django.contrib import admin
-from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment
-from backend.forms import ProductForms
+from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment , ProductGallery
+from django.utils.html import format_html
 
 # Register your models here.
 class categoryAdmin(admin.ModelAdmin):
-    list_display = ("category_name", "description" , "thumbnail" , "created_at")
+    list_display = ("category_name", "description" , "category_thumbnail" )
 admin.site.register(Category, categoryAdmin)
 
 admin.site.register(Customer)
 admin.site.register(Profile)
 admin.site.register(Review)
 
+#Product gallery images 
+class ProductGalleryInline(admin.TabularInline): # or admin.StackedInline
+    model = ProductGallery
+    extra = 1
+    fields = ['gallery_image', 'image_preview']
+    readonly_fields = ['image_preview']
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="width: 100px; height: auto;" />', obj.image.url)
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
+
 # product model
 class productAdmin(admin.ModelAdmin):
-    form = ProductForms
-    def save_model(self, request, obj, form, change):
-        # If multiple files are uploaded, handle each file
-        files = request.FILES.getlist('file')
-        for file in files:
-            Product.objects.create(file=file)
-
+    inlines = [ProductGalleryInline]
     list_display = (
-        "product_title", 
+        "product_title",
+        "slug", 
         "sub_title", 
         "product_description", 
         "price", 
         "color",
         "size", 
         "product_thumbnail",
-        "product_gallery",
-
         )
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('product_title', 'category', 'price', 'discount_price')
-    fields = ['category', 'product_title', 'sub_title', 'product_description', 'price', 
-              'discount_price', 'color', 'size', 'product_thumbnail', 'product_gallery']
 admin.site.register(Product, productAdmin)
 # end product model
+
+# Product Gallery Admin 
+class ProductGalleryAdmin(admin.ModelAdmin):
+    list_display = ('product', 'gallery_image', 'created_at')
+    search_fields = ('product__product_title',)
+admin.site.register(ProductGallery, ProductGalleryAdmin)
+
 
 admin.site.register(Order)
 admin.site.register(OrderItem)

@@ -10,6 +10,7 @@ class Profile(models.Model):
     dob = models.DateField(verbose_name="Date of Birth")
     location = models.CharField(max_length=255)
     customer_image = models.ImageField(upload_to='customer_images/', null=True, blank=True)
-   
+    created_at = models.DateTimeField(auto_now_add=True) 
+
     def __str__(self):
         return self.full_name

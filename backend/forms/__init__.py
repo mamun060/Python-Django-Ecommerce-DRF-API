@@ -1,2 +1,4 @@
 from .comment_forms import CommentForm
-from .product_forms import ProductForms
+from .productGallery_forms import ProductGalleryForm
+from .customerRegisterForms import CustomerRegisterForms
+from .customerLoginForms import CustomerLoginForm

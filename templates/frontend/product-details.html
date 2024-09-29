@@ -26,54 +26,22 @@
              <div class="product-images">
                  <div class="product-zoom-images">
                    <div class="row row-cols-2 g-3">
+                    {% for image in product_gallery %}
                      <div class="col">
                        <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/01.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/01.jpg' %}" class="img-fluid" alt="">
+                         <img src="{{ image.gallery_image.url }}" class="img-fluid" alt="{{ image.gallery_image}}">
                        </div>
                      </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/02.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/02.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/03.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/03.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/04.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/04.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/05.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/05.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/06.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/06.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/07.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/07.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
-                     <div class="col">
-                       <div class="img-thumb-container overflow-hidden position-relative" data-fancybox="gallery" data-src="{% static 'frontend/assets/images/product-images/08.jpg' %}">
-                         <img src="{% static 'frontend/assets/images/product-images/08.jpg' %}" class="img-fluid" alt="">
-                       </div>
-                     </div>
+                     {% endfor %}
+                    
                    </div><!--end row-->
                  </div>
              </div>
            </div>
            <div class="col-12 col-xl-5">
              <div class="product-info">
-                   <h4 class="product-title fw-bold mb-1">Check Pink Kurta</h4>
-                   <p class="mb-0">Women Pink & Off-White Printed Kurta with Palazzos</p>
+                   <h4 class="product-title fw-bold mb-1"> {{ product.product_title }} </h4>
+                   <p class="mb-0">{{ product.sub_title }}</p>
                    <div class="product-rating">
                      <div class="hstack gap-2 border p-1 mt-3 width-content">
                        <div><span class="rating-number">4.8</span><i class="bi bi-star-fill ms-1 text-warning"></i></div>
@@ -83,59 +51,31 @@
                    </div>
                    <hr>
                    <div class="product-price d-flex align-items-center gap-3">
-                      <div class="h4 fw-bold">$458</div>
-                      <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>
+                      <div class="h4 fw-bold">${{product.discount_price}}</div>
+                      <div class="h5 fw-light text-muted text-decoration-line-through">${{product.price}}</div>
                       <div class="h4 fw-bold text-danger">(70% off)</div>  
                    </div>
                    <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>
  
-                   <div class="more-colors mt-4">
+                   <div class="size-chart mt-4">
                      <h6 class="fw-bold mb-3">More Colors</h6>
-                     <div class="d-flex align-items-center gap-3">
-                       <div class="">
-                         <a href="javascript:;">
-                           <img src="{% static 'frontend/assets/images/featured-products/01.webp' %}" width="65" alt="">
-                         </a>
-                       </div>
-                       <div class="">
-                         <a href="javascript:;">
-                           <img src="{% static 'frontend/assets/images/featured-products/02.webp' %}" width="65" alt="">
-                         </a>
-                       </div>
-                       <div class="">
-                         <a href="javascript:;">
-                           <img src="{% static 'frontend/assets/images/featured-products/03.webp' %}" width="65" alt="">
-                         </a>
-                       </div>
-                       <div class="">
-                         <a href="javascript:;">
-                           <img src="{% static 'frontend/assets/images/featured-products/04.webp' %}" width="65" alt="">
-                         </a>
-                       </div>
-                     </div>
+                     <div class="d-flex align-items-center gap-2 flex-wrap">
+                      {% for color in product.color %}
+                      <div class="">
+                        <button type="button">{{color.color}}</button>
+                      </div>
+                      {% endfor %}
+                    </div>
                    </div>
                      
                    <div class="size-chart mt-4">
                      <h6 class="fw-bold mb-3">Select Size</h6>
                      <div class="d-flex align-items-center gap-2 flex-wrap">
+
                       <div class="">
                         <button type="button">XS</button>
                       </div>
-                      <div class="">
-                       <button type="button">S</button>
-                     </div>
-                      <div class="">
-                       <button type="button">M</button>
-                     </div>
-                     <div class="">
-                       <button type="button">L</button>
-                     </div>
-                     <div class="">
-                       <button type="button">XL</button>
-                     </div>
-                     <div class="">
-                       <button type="button">XXL</button>
-                     </div>
+                    
                     </div>
                    </div>
                    <div class="cart-buttons mt-3">
@@ -147,10 +87,10 @@
                    <hr class="my-3">
                    <div class="product-info">
                      <h6 class="fw-bold mb-3">Product Details</h6>
-                      <p class="mb-1">There are many variations of passages of Lorem Ipsum</p>
-                      <p class="mb-1">All the Lorem Ipsum generators on the Internet tend to repeat</p>
-                      <p class="mb-1">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece</p>
-                      <p class="mb-1">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+                      <p class="mb-1">
+                        {{ product.product_description }}
+                      </p>
+
                    </div>
                    <hr class="my-3">
                    <div class="customer-ratings">
@@ -206,7 +146,7 @@
                        </div>
                    </div>
  
-                   <hr class="my-3">
+                   <!-- <hr class="my-3">
                    <div class="customer-reviews">
                      <h6 class="fw-bold mb-3">Customer Reviews (875)</h6>
                      <div class="reviews-wrapper">
@@ -302,7 +242,7 @@
                          <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">View All Reviws<i class="bi bi-arrow-right ms-2"></i></a>
                        </div>
                      </div>
-                   </div>
+                   </div> -->
              </div>
            </div>
         </div><!--end row-->

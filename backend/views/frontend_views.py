@@ -1,5 +1,5 @@
 from django.shortcuts import render , get_object_or_404 , redirect
-from backend.models import Blog , Comment, Category
+from backend.models import Blog , Comment, Category, Product , ProductGallery
 from backend.forms import CommentForm
 
 
@@ -11,10 +11,18 @@ def home(request):
     })
 
 def shop(request):
-    return render(request, 'frontend/shop.html')
+    products = Product.objects.all()
+    return render(request, 'frontend/shop.html', {
+        "products": products
+    })
 
-def product_details(request):
-    return render(request, 'frontend/product-details.html')
+def product_details(request, slug):
+    product = Product.objects.get(slug=slug)
+    product_gallery = ProductGallery.objects.filter(product_id=product)
+    return render(request, 'frontend/product-details.html', {
+        "product": product,
+        "product_gallery": product_gallery
+    })
 
 def about_us(request):
     return render(request , 'frontend/about.html')
@@ -55,7 +63,3 @@ def cart(request):
 
 def wishlist(request):
     return render(request, 'frontend/wishlist.html')
-
-# customer account page
-def customer_dashboard(request):
-    return render(request, 'frontend/account/dashboard.html')

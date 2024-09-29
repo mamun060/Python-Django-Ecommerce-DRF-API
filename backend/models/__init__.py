@@ -8,3 +8,4 @@ from .orderItem import OrderItem
 from .author import Author
 from .blog import Blog
 from .comment import Comment
+from .productGallery import ProductGallery
