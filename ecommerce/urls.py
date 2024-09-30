@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path , include
-from backend.views import frontend_views , account_views
+from backend.views import frontend_views , account_views , cart_views
 
 urlpatterns = [
     # frontend url 
@@ -22,6 +22,12 @@ urlpatterns = [
     path('user/register', account_views.customer_register, name="customer-register"),
     path('user/profile', account_views.customer_profile, name="customer-profile"),
     path('user/logout', account_views.customer_logout , name="customer-logout"),
+
+    # cart 
+    path('cart', cart_views.cart_detail, name='cart_detail'),
+    path('cart/add/<int:product_id>', cart_views.add_to_cart, name='add_to_cart'),
+    path('cart/update/<int:product_id>', cart_views.update_cart, name='update_cart'),
+    path('cart/remove/<int:product_id>', cart_views.remove_from_cart, name='remove_from_cart'),
     # Django super admin url
     path('admin/', admin.site.urls),
 ]

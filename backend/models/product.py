@@ -1,9 +1,11 @@
+from django.utils.text import slugify
 from django.db import models
 from .category import Category
-from django.utils.text import slugify
+from .brand import Brand
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')
     product_title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, max_length=255, blank=True, null=True)
     sub_title = models.CharField(max_length=255)

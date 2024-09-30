@@ -388,8 +388,9 @@
                        <div class="position-relative overflow-hidden">
                          <div class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
                            <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                           <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                           <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewModal"><i class="bi bi-zoom-in"></i></a>
+                           <a href="{% url 'add_to_cart' product.id %}"><i class="bi bi-basket3"></i></a>
+
+                           <!-- <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewModal"><i class="bi bi-zoom-in"></i></a> -->
                          </div>
                          <a href="{% url 'product-details' product.slug %}">
                            {% if product.product_thumbnail %}
@@ -423,9 +424,34 @@
    </section>
     <!--start product details-->
  
- 
-   
-   
   </div>
    <!--end page content-->
+{% endblock %}
+
+
+{% block extra_js %}
+<!-- <script type="text/javaScript">
+  $(document).on('click', '.add-to-cart-btn', function() {
+      const form = $(this).closest('.add-to-cart-form');
+      const productId = form.data('product-id');
+
+      // Get the CSRF token
+      const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+      $.ajax({
+          type: 'POST',
+          url: `/cart/add/${productId}`,
+          data: {
+              'csrfmiddlewaretoken': csrfToken,
+          },
+          success: function(response) {
+              alert(response.message + ' (Quantity: ' + response.quantity + ')');
+          },
+          error: function(xhr) {
+              const errorMsg = xhr.responseJSON ? xhr.responseJSON.error : 'Failed to add to cart.';
+              alert(errorMsg);
+          }
+      });
+  });
+</script> -->
 {% endblock %}

@@ -1,11 +1,15 @@
 from django.contrib import admin
-from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment , ProductGallery
+from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment , ProductGallery, Brand
 from django.utils.html import format_html
 
 # Register your models here.
 class categoryAdmin(admin.ModelAdmin):
     list_display = ("category_name", "description" , "category_thumbnail" )
 admin.site.register(Category, categoryAdmin)
+
+class brandAdmin(admin.ModelAdmin):
+    list_display = ("name" , "description" , "thumbnail")
+admin.site.register(Brand, brandAdmin)
 
 admin.site.register(Customer)
 admin.site.register(Profile)

@@ -9,3 +9,6 @@ from .author import Author
 from .blog import Blog
 from .comment import Comment
 from .productGallery import ProductGallery
+from .cart import Cart
+from .cartItem import CartItem
+from .brand import Brand
