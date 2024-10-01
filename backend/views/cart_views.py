@@ -1,24 +1,41 @@
-from django.http import JsonResponse , HttpResponseForbidden
+from django.http import JsonResponse , HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404 , render ,redirect
 from backend.models import Product , Cart , CartItem , Customer 
+from backend.decorators import customer_required
 
-
+@customer_required
 def add_to_cart(request, product_id):
+    # Get the customer from the session using the stored customer_id
+    customer_id = request.session.get('customer_id')
+    customer = get_object_or_404(Customer, id=customer_id)
+
+    # Get the product using the product_id
     product = get_object_or_404(Product, id=product_id)
-    cart_item, created = Cart.objects.get_or_create(user=request.user, product=product)
-    cart_item.quantity += 1
+
+    # Get or create a cart for the customer
+    cart, created = Cart.objects.get_or_create(customer=customer)
+
+    # Add or update the CartItem for the product
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    if not created:
+        cart_item.quantity += 1
     cart_item.save()
-    return redirect('shop')
+
+    return redirect('cart')
 
 
 def cart_detail(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({"error": "You need to be logged in to view the cart."}, status=403)
-
-    customer = get_object_or_404(Customer, user=request.user)
+    customer_id = request.session.get('customer_id')
+    customer = get_object_or_404(Customer, id=customer_id)
     cart = get_object_or_404(Cart, customer=customer)
 
-    return render(request, 'frontend/account/cart-details.html', {'cart': cart})
+    # Retrieve all cart items
+    cart_items = CartItem.objects.filter(cart=cart)
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'frontend/cart-details.html',{
+        "cart_items": cart_items,
+        "total_price": total_price
+    })
 
 
 def update_cart(request, product_id):
@@ -40,10 +57,17 @@ def update_cart(request, product_id):
 
 
 
+
 def remove_from_cart(request, product_id):
-    if request.method == "POST" and request.is_ajax():
-        customer = get_object_or_404(Customer, user=request.user)
+    if request.method == "POST" and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        # Get the customer from the session using the stored customer_id
+        customer_id = request.session.get('customer_id')
+        customer = get_object_or_404(Customer, id=customer_id)
+        
+        # Get the cart associated with the customer
         cart = get_object_or_404(Cart, customer=customer)
+        
+        # Get the cart item to be removed
         cart_item = get_object_or_404(CartItem, cart=cart, product_id=product_id)
         cart_item.delete()
 

@@ -13,7 +13,6 @@ urlpatterns = [
     path('contact-us',frontend_views.contact, name="contact-us"),
     path('blogs', frontend_views.blogs, name="blogs"),
     path('blog/<slug:slug>', frontend_views.blog_details, name="blog-details"),
-    path('cart', frontend_views.cart, name="cart"),
     path('wishlist', frontend_views.wishlist, name="wishlist"),
 
     #customer account route 
@@ -24,7 +23,7 @@ urlpatterns = [
     path('user/logout', account_views.customer_logout , name="customer-logout"),
 
     # cart 
-    path('cart', cart_views.cart_detail, name='cart_detail'),
+    path('cart', cart_views.cart_detail, name='cart'),
     path('cart/add/<int:product_id>', cart_views.add_to_cart, name='add_to_cart'),
     path('cart/update/<int:product_id>', cart_views.update_cart, name='update_cart'),
     path('cart/remove/<int:product_id>', cart_views.remove_from_cart, name='remove_from_cart'),

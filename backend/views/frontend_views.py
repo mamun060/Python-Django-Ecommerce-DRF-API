@@ -58,8 +58,5 @@ def blog_details(request , slug):
         'comments': comments,
     })
 
-def cart(request):
-    return render(request, 'frontend/cart.html')
-
 def wishlist(request):
     return render(request, 'frontend/wishlist.html')
