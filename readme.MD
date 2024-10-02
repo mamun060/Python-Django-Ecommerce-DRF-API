@@ -79,7 +79,6 @@ python -m pip install Pillow
 ```python
 {% block extra_js %} {% endblock %}
 ```
-
 ### Django admin Dashboard manage like list_display, filter, pagination, search
 ```python
 class commentAdmin(admin.ModelAdmin):
@@ -97,3 +96,63 @@ class commentAdmin(admin.ModelAdmin):
 admin.site.register(Comment, commentAdmin)
 ```
 
+### Customer login and registration and auth setup with decorations
+```
+# Decoration for protect route 
+from django.shortcuts import redirect
+from functools import wraps
+
+def customer_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if 'customer_id' in request.session:
+            return view_func(request, *args, **kwargs)
+        return redirect('customer-login')  # Redirect to login if not authenticated
+    return _wrapped_view
+
+
+#Customer Login functionality
+def customer_login(request):
+    if request.method == 'POST':
+        form = CustomerLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                customer = Customer.objects.get(email=email)
+                if check_password(password, customer.password):  # Check the hashed password
+                    request.session['customer_id'] = customer.id  # Set session
+                    return redirect('customer-dashboard')  # Redirect to home or desired page
+                else:
+                    messages.error(request, 'Invalid email or password.')
+            except Customer.DoesNotExist:
+                messages.error(request, 'Invalid email or password.')
+    else:
+        form = CustomerLoginForm()
+
+    return render(request, 'frontend/account/login.html', {
+        "form": form
+    })
+
+#Customer Logout Feature
+def customer_logout(request):
+    request.session.flush()  # Clear the session
+    return redirect('customer-login')
+
+def customer_register(request):
+    form = CustomerRegisterForms()  # Initialize the form
+    if request.method == 'POST':
+        form = CustomerRegisterForms(request.POST)
+        if form.is_valid():
+            customer = form.save(commit=False)
+            customer.password = make_password(form.cleaned_data['password'])  # Hash the password
+            customer.save()
+            messages.success(request, 'Registration successful! You can now log in.')
+            return redirect('customer-login')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+
+    return render(request, 'frontend/account/register.html', {
+        "form": form
+    })
+```
