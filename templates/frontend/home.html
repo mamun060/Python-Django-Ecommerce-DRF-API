@@ -353,7 +353,7 @@
     <section class="product-tab-section section-padding bg-light">
       <div class="container">
         <div class="text-center pb-3">
-          <h3 class="mb-0 h3 fw-bold">Latest Products</h3>
+          <h3 class="mb-0 h3 fw-bold">Products</h3>
           <p class="mb-0 text-capitalize">The purpose of lorem ipsum</p>
         </div>
         <div class="row">
@@ -1235,96 +1235,18 @@
         </div>
         <div class="brands">
           <div class="row row-cols-2 row-cols-lg-5 g-4">
+            {% for brand in brands %}
             <div class="col">
               <div class="p-3 border rounded brand-box">
                 <div class="d-flex align-items-center">
                   <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/01.webp' %}" class="img-fluid" alt="">
+                    <img src="{{ brand.thumbnail.url }}" class="img-fluid" alt="">
                   </a>
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/02.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/03.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/04.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/05.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/06.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/07.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/08.webp ' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/09.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="p-3 border rounded brand-box">
-                <div class="d-flex align-items-center">
-                  <a href="javascript:;">
-                    <img src="{% static  'frontend/assets/images/brands/10.webp' %}" class="img-fluid" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
+            
           </div>
           <!--end row-->
         </div>
