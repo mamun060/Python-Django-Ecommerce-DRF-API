@@ -2,13 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path , include
-from backend.views import frontend_views , account_views , cart_views
+from backend.views import frontend_views , account_views , cart_views, product_views
 
 urlpatterns = [
     # frontend url 
     path('', frontend_views.home , name='home'),
-    path('shop', frontend_views.shop, name="shop"),
-    path('shop/<slug:slug>', frontend_views.product_details, name="product-details"),
+    path('shop', product_views.shop, name="shop"),
+    path('shop/<slug:slug>', product_views.product_details, name="product-details"),
     path('about-us', frontend_views.about_us, name="about-us"),
     path('contact-us',frontend_views.contact, name="contact-us"),
     path('blogs', frontend_views.blogs, name="blogs"),
@@ -21,6 +21,7 @@ urlpatterns = [
     path('user/register', account_views.customer_register, name="customer-register"),
     path('user/profile', account_views.customer_profile, name="customer-profile"),
     path('user/logout', account_views.customer_logout , name="customer-logout"),
+    path('checkout', account_views.checkout, name="checkout"),
 
     # cart 
     path('cart', cart_views.cart_detail, name='cart'),

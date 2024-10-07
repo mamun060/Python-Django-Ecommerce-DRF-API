@@ -2,26 +2,11 @@ from django.shortcuts import render , get_object_or_404 , redirect
 from backend.models import Blog , Comment, Category, Product , ProductGallery
 from backend.forms import CommentForm
 
-
 #Here is include frontend views
 def home(request):
     categories = Category.objects.all() 
     return render(request, 'frontend/home.html',{
         "categories": categories
-    })
-
-def shop(request):
-    products = Product.objects.all()
-    return render(request, 'frontend/shop.html', {
-        "products": products
-    })
-
-def product_details(request, slug):
-    product = Product.objects.get(slug=slug)
-    product_gallery = ProductGallery.objects.filter(product_id=product)
-    return render(request, 'frontend/product-details.html', {
-        "product": product,
-        "product_gallery": product_gallery
     })
 
 def about_us(request):
@@ -60,3 +45,4 @@ def blog_details(request , slug):
 
 def wishlist(request):
     return render(request, 'frontend/wishlist.html')
+

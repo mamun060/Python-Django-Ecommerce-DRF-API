@@ -60,9 +60,9 @@
                    <div class="size-chart mt-4">
                      <h6 class="fw-bold mb-3">More Colors</h6>
                      <div class="d-flex align-items-center gap-2 flex-wrap">
-                      {% for color in product.color %}
+                      {% for color_item in product.color %}
                       <div class="">
-                        <button type="button">{{color.color}}</button>
+                        <button type="button">{{color_item}}</button>
                       </div>
                       {% endfor %}
                     </div>
@@ -71,17 +71,19 @@
                    <div class="size-chart mt-4">
                      <h6 class="fw-bold mb-3">Select Size</h6>
                      <div class="d-flex align-items-center gap-2 flex-wrap">
-
+                      {% for size_item in product.size %}
                       <div class="">
-                        <button type="button">XS</button>
+                        <button type="button">{{ size_item }}</button>
                       </div>
-                    
+                    {% endfor %}
                     </div>
                    </div>
                    <div class="cart-buttons mt-3">
                      <div class="buttons d-flex flex-column flex-lg-row gap-3 mt-4">
-                       <a href="javascript:;" class="btn btn-lg btn-dark btn-ecomm px-5 py-3 col-lg-6"><i class="bi bi-basket2 me-2"></i>Add to Bag</a>
-                       <a href="javascript:;" class="btn btn-lg btn-outline-dark btn-ecomm px-5 py-3"><i class="bi bi-suit-heart me-2"></i>Wishlist</a>
+                       <a href="javascript:;" class="btn btn-lg btn-dark btn-ecomm px-5 py-3 col-lg-6">
+                        <i class="bi bi-basket2 me-2"></i>Buy Now</a>
+                       <a href="javascript:;" class="btn btn-lg btn-outline-dark btn-ecomm px-5 py-3">
+                        <i class="bi bi-suit-heart me-2"></i>Wishlist</a>
                      </div>
                    </div>
                    <hr class="my-3">
@@ -252,7 +254,7 @@
  
  
    <!--start product details-->
-   <section class="section-padding">
+   <!-- <section class="section-padding">
      <div class="container">
        <div class="separator pb-3">
          <div class="line"></div>
@@ -424,10 +426,10 @@
  
    
          </div>
-         <!--end row-->
        </div>
      </div>
-   </section>
+   </section> -->
+
    <!--end product details-->
  
    

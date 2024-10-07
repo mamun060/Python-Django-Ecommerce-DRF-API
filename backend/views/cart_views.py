@@ -5,23 +5,35 @@ from backend.decorators import customer_required
 
 @customer_required
 def add_to_cart(request, product_id):
-    # Get the customer from the session using the stored customer_id
-    customer_id = request.session.get('customer_id')
-    customer = get_object_or_404(Customer, id=customer_id)
+    if request.method == "POST":
+        customer_id = request.session.get('customer_id')
+        
+        # Check if the customer exists
+        if not customer_id:
+            return JsonResponse({"error": "Customer not logged in"}, status=403)
 
-    # Get the product using the product_id
-    product = get_object_or_404(Product, id=product_id)
+        # Get the product by ID
+        product = get_object_or_404(Product, id=product_id)
 
-    # Get or create a cart for the customer
-    cart, created = Cart.objects.get_or_create(customer=customer)
+        # Get or create a cart for the customer
+        cart, created = Cart.objects.get_or_create(customer_id=customer_id)
 
-    # Add or update the CartItem for the product
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-    if not created:
-        cart_item.quantity += 1
-    cart_item.save()
+        # Get or create a CartItem for the product in the cart
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
-    return redirect('cart')
+        if created:
+            cart_item.quantity = 1  # If it's new, set quantity to 1
+        else:
+            cart_item.quantity += 1  # If it exists, increment the quantity
+
+        cart_item.save()  # Save the cart item
+
+        return JsonResponse({
+            "message": "Product added to cart!",
+            "quantity": cart_item.quantity
+        }, status=200)
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 
 def cart_detail(request):

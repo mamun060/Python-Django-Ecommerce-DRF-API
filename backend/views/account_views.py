@@ -62,3 +62,8 @@ def customer_register(request):
 # Customer Profile view
 def customer_profile(request):
     return render(request, 'frontend/account/profile.html')
+
+
+@customer_required
+def checkout(request):
+    return render(request, 'frontend/checkout.html')
