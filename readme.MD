@@ -97,7 +97,7 @@ admin.site.register(Comment, commentAdmin)
 ```
 
 ### Customer login and registration and auth setup with decorations
-```
+```python
 # Decoration for protect route 
 from django.shortcuts import redirect
 from functools import wraps
@@ -159,7 +159,7 @@ def customer_register(request):
 ```
 
 ### Register and Login form and best approach to include custom css to the form widget 
-```
+```python
 from django import forms
 from backend.models import Customer
 
@@ -177,10 +177,9 @@ class CustomerLoginForm(forms.Form):
             'placeholder': 'Enter your password'
         })
     )
-
+# register form 
 from django import forms
 from backend.models import Customer
-
 
 class CustomerRegisterForms(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(
@@ -235,6 +234,7 @@ class CustomerRegisterForms(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
 ```
+
 ### Django DRF installation for API 
 ### pip install djangorestframework
 ```python
