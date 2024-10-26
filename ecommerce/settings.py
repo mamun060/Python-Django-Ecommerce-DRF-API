@@ -39,7 +39,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
+
+# Configure REST framework with JWT authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Requires authentication by default
+    ),
+}
+
+# JWT Configuration (Optional)
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Token expires after 15 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # Refresh token valid for 7 days
+    'ROTATE_REFRESH_TOKENS': True,                   # Issue new refresh token on use
+    'BLACKLIST_AFTER_ROTATION': True,                # Blacklist old tokens after rotation
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

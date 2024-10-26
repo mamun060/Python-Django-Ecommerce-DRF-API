@@ -281,3 +281,100 @@ urlpatterns = [
     path('brands', brand_api_views.BrandListAPIView.as_view() , name="brand-lists"),
 ]
 ```
+
+### Django Rest Framework JWT token based authentication and Authorization practice.
+
+### Step-01: install jwt package 
+pip install djangorestframework-simplejwt
+
+### Step 2: Configure Django Settings for JWT Authentication
+```python
+# Add 'rest_framework' and 'rest_framework_simplejwt' to your INSTALLED_APPS
+INSTALLED_APPS = [
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+]
+
+# Configure REST framework with JWT authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Requires authentication by default
+    ),
+}
+
+# JWT Configuration (Optional)
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Token expires after 15 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # Refresh token valid for 7 days
+    'ROTATE_REFRESH_TOKENS': True,                   # Issue new refresh token on use
+    'BLACKLIST_AFTER_ROTATION': True,                # Blacklist old tokens after rotation
+}
+```
+
+### Step 3: Create URLs for JWT Authentication
+```python
+from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
+urlpatterns = [
+    # JWT authentication endpoints
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+]
+# /api/token/: Obtain access and refresh tokens.
+# /api/token/refresh/: Use the refresh token to get a new access token.
+# /api/token/verify/: Verify if a token is valid.
+```
+
+### Step 4: Protect API Endpoints with JWT Authentication
+```python
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from backend.models.brand import Brand
+from .serializers import BrandSerializer
+
+class BrandListAPIView(APIView):
+    permission_classes = [IsAuthenticated]  # Requires JWT authentication
+
+    def get(self, request):
+        brands = Brand.objects.all()
+        serializer = BrandSerializer(brands, many=True)
+        return Response(serializer.data)
+```
+
+### Step 05: Public Access API Endpoints without JWT Authentication
+```python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from backend.models import Brand
+from backend.serializers import BrandSerializer
+# Authorization permission assigned 
+from rest_framework.permissions import AllowAny
+
+class BrandListAPIView(APIView):
+    permission_classes = [AllowAny] # Allow access without authentication
+    def get(self, request):
+            brands = Brand.objects.all()
+            serializerBrand = BrandSerializer(brands, many = True)
+            return Response(
+                serializerBrand.data,
+                status=status.HTTP_200_OK
+            )
+```
