@@ -2,7 +2,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path , include
-from backend.views import frontend_views , account_views , cart_views, product_views
+from backend.views import frontend_views , account_views , cart_views, product_views , blog_views
+
 
 urlpatterns = [
     # frontend url 
@@ -11,8 +12,8 @@ urlpatterns = [
     path('shop/<slug:slug>', product_views.product_details, name="product-details"),
     path('about-us', frontend_views.about_us, name="about-us"),
     path('contact-us',frontend_views.contact, name="contact-us"),
-    path('blogs', frontend_views.blogs, name="blogs"),
-    path('blog/<slug:slug>', frontend_views.blog_details, name="blog-details"),
+    path('blogs', blog_views.blogs, name="blogs"),
+    path('blog/<slug:slug>', blog_views.blog_details, name="blog-details"),
     path('wishlist', frontend_views.wishlist, name="wishlist"),
 
     #customer account route 
@@ -28,6 +29,12 @@ urlpatterns = [
     path('cart/add/<int:product_id>', cart_views.add_to_cart, name='add_to_cart'),
     path('cart/update/<int:product_id>', cart_views.update_cart, name='update_cart'),
     path('cart/remove/<int:product_id>', cart_views.remove_from_cart, name='remove_from_cart'),
+
+    # api route file include here
+    path('api/', include('backend.urls')),
+
+    
+
     # Django super admin url
     path('admin/', admin.site.urls),
 ]

@@ -235,6 +235,49 @@ class CustomerRegisterForms(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
 ```
+### Django DRF installation for API 
+### pip install djangorestframework
+```python
+#installted appas in settings files
+INSTALLED_APPS = [
+    'rest_framework',
+]
+```
+### Model Seriliazer
+```python
+from rest_framework import serializers
+from backend.models import Brand
 
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = '__all__'
+```
 
+### Write View for api create 
+```python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from backend.models import Brand
+from backend.serializers import BrandSerializer
 
+class BrandListAPIView(APIView):
+    def get(self, request):
+            brands = Brand.objects.all()
+            serializerBrand = BrandSerializer(brands, many = True)
+            return Response(
+                serializerBrand.data,
+                status=status.HTTP_200_OK
+            )
+```
+
+### API url 
+```python
+from django.urls import path, include
+from backend.apiViews import brand_api_views
+
+urlpatterns = [
+    path('brands', brand_api_views.BrandListAPIView.as_view() , name="brand-lists"),
+]
+```
