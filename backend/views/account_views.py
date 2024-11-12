@@ -10,7 +10,6 @@ from backend.decorators import customer_required
 def customer_dashboard(request):
     return render(request, 'frontend/account/dashboard.html')
 
-
 # Customer Login view 
 def customer_login(request):
     if request.method == 'POST':
@@ -57,12 +56,10 @@ def customer_register(request):
         "form": form
     })
 
-
 @customer_required
 # Customer Profile view
 def customer_profile(request):
     return render(request, 'frontend/account/profile.html')
-
 
 @customer_required
 def checkout(request):

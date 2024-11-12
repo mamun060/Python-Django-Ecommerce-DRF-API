@@ -33,8 +33,6 @@ urlpatterns = [
     # api route file include here
     path('api/', include('backend.urls')),
 
-    
-
     # Django super admin url
     path('admin/', admin.site.urls),
 ]
