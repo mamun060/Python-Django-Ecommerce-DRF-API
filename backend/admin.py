@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment , ProductGallery, Brand
+from .models import Category, Customer, Profile, Review, Product, Order, OrderItem, Author, Blog, Comment , ProductGallery, Brand 
 from django.utils.html import format_html
 
 # Register your models here.
@@ -50,14 +50,16 @@ class ProductGalleryAdmin(admin.ModelAdmin):
     search_fields = ('product__product_title',)
 admin.site.register(ProductGallery, ProductGalleryAdmin)
 
-
+# Order and Orter Item model register in admin
 admin.site.register(Order)
 admin.site.register(OrderItem)
 
+# Author model register in admin
 class authorAdmin(admin.ModelAdmin):
     list_display = ("name","email","phone")
 admin.site.register(Author, authorAdmin)
 
+# blog model register in admin
 class blogAdmin(admin.ModelAdmin):
     list_display = ("author_id","title", "sub_title" , "description" , "thumbnail")
 admin.site.register(Blog, blogAdmin)
@@ -75,3 +77,6 @@ class commentAdmin(admin.ModelAdmin):
     # Set the display name for the column
     get_post_title.short_description = 'Post Title'
 admin.site.register(Comment, commentAdmin)
+
+
+# Document model register in admin

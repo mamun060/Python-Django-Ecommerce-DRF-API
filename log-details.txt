@@ -1,0 +1,8 @@
+test admin:
+user name: mamun
+email: mamun@gmail.com
+password: 12345678
+
+test customer:
+email: raju@gmail.com
+pass: 12345678

@@ -12,3 +12,4 @@ from .productGallery import ProductGallery
 from .cart import Cart
 from .cartItem import CartItem
 from .brand import Brand
+from .storeFiles import StoreFiles
