@@ -7,7 +7,7 @@ urlpatterns = [
     # frontend route file include here
     path('', include('backend.urls')),
     # api route file include here
-    path('api/', include('backend.apiUrls')),
+    path('v1/api/', include('backend.apiUrls')),
     # Django super admin url
     path('admin/', admin.site.urls),
 ]

@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 class BrandListAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def get(self, request):
             brands = Brand.objects.all()
             serializerBrand = BrandSerializer(brands, many = True)

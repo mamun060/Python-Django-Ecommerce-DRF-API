@@ -1,5 +1,5 @@
 from django.urls import path, include
-from backend.apiViews import brand_api_views , customer_api_views
+from backend.apiViews import brand_api_views , customer_api_views, category_api_views
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 # This urls file use for only api
 urlpatterns = [
     path('brands', brand_api_views.BrandListAPIView.as_view() , name="brand-lists"),
-    
+    path('categories', category_api_views.CategoryListAPIViwes.as_view(), name='category-lists'),
     # JWT authentication endpoints
     path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
