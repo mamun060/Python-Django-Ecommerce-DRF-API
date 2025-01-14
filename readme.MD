@@ -368,13 +368,38 @@ from backend.serializers import BrandSerializer
 # Authorization permission assigned 
 from rest_framework.permissions import AllowAny
 
-class BrandListAPIView(APIView):
-    permission_classes = [AllowAny] # Allow access without authentication
+class ProductApiViews(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
-            brands = Brand.objects.all()
-            serializerBrand = BrandSerializer(brands, many = True)
+        try:
+            proudcts = Product.objects.all()
+            SerializerProduct = ProductSerializer(proudcts, many=True)
             return Response(
-                serializerBrand.data,
+                SerializerProduct.data ,
                 status=status.HTTP_200_OK
             )
+        except Product.DoesNotExist:
+            return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+# single product details API endpoint
+class ProductDetailsApiView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, slug):
+        try:
+            product = Product.objects.get(slug=slug)
+            serializer = ProductSerializer(product)
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+        except Product.DoesNotExist:
+            return Response(
+                {"error": "Product Details not found!"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+```
+
+### Django DRF defualt filter library
+```
+install: pip install django-filter
 ```
