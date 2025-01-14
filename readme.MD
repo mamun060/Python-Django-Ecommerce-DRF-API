@@ -399,7 +399,7 @@ class ProductDetailsApiView(APIView):
             )
 ```
 
-### Django DRF defualt filter library
+### Step-06: Django DRF defualt filter library
 ```python
 install: pip install django-filter
 # first - setup settings file 
