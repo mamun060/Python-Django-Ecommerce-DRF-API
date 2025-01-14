@@ -400,6 +400,46 @@ class ProductDetailsApiView(APIView):
 ```
 
 ### Django DRF defualt filter library
-```
+```python
 install: pip install django-filter
+# first - setup settings file 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+# second step - setup serializer where you need to apply filter
+from rest_framework import serializers
+from backend.models import Product
+from backend.serializers import BrandSerializer, CategorySerializer
+
+class ProductSerializer(serializers.ModelSerializer):
+    brand = BrandSerializer()
+    category = CategorySerializer()
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+# 3rd step - apply api filter views
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from backend.serializers import ProductSerializer
+from backend.models import Product
+from rest_framework.permissions import AllowAny
+from django_filters.rest_framework import DjangoFilterBackend
+
+class ProductApiViews(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        try:
+            proudcts = Product.objects.all()
+            SerializerProduct = ProductSerializer(proudcts, many=True)
+            filter_backends = [DjangoFilterBackend]
+            filterset_fields = ['brand', 'category']
+            return Response(
+                SerializerProduct.data ,
+                status=status.HTTP_200_OK
+            )
+        except Product.DoesNotExist:
+            return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 ```
