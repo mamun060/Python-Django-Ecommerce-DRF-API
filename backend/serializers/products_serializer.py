@@ -18,3 +18,11 @@ class ProductSerializer(serializers.ModelSerializer):
             existing = set(self.fields)
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
+
+# Find product max price
+class ProductInfoSerializer(serializers.Serializer):
+    products = ProductSerializer(many=True)
+    count = serializers.IntegerField()
+    min_price = serializers.FloatField()
+    max_price = serializers.FloatField()
+     
