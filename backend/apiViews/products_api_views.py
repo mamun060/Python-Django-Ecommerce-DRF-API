@@ -11,7 +11,7 @@ class ProductApiViews(APIView):
     def get(self, request):
         try:
             proudcts = Product.objects.all()
-            SerializerProduct = ProductSerializer(proudcts, many=True)
+            SerializerProduct = ProductSerializer(proudcts, many=True, fields=["id", "product_title", "slug" , "price", "product_thumbnail"])
             filter_backends = [DjangoFilterBackend]
             filterset_fields = ['brand', 'category']
             return Response(
@@ -28,10 +28,10 @@ class ProductDetailsApiView(APIView):
         try:
             product = Product.objects.get(slug=slug)
             serializer = ProductSerializer(product)
-            return Response(
-                serializer.data,
-                status=status.HTTP_200_OK
-            )
+            return Response({
+                "data": serializer.data,
+                "status": status.HTTP_200_OK
+            })
         except Product.DoesNotExist:
             return Response(
                 {"error": "Product Details not found!"},
