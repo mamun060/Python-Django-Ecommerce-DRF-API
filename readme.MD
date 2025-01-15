@@ -497,4 +497,28 @@ class AlbumSerializer(serializers.ModelSerializer):
         return album
 ```
 
- 
+### Django-silk = for api profiling and optimization library
+```python
+#install: pip install django-silk
+
+#Settings 
+MIDDLEWARE_CLASSES = (
+    ...
+    'silk.middleware.SilkyMiddleware',
+    ...
+)
+
+INSTALLED_APPS = (
+    ...
+    'silk'
+)
+
+# Add the following to your urls.py:
+urlpatterns = [
+    path('silk/', include('silk.urls', namespace='silk')),
+]
+
+# then migrate again 
+python manage.py makemigrations
+python manage.py migrate
+```

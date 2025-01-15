@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'backend',
     'rest_framework',
     'rest_framework_simplejwt',
+    'silk'
 ]
 
 # Configure REST framework with JWT authentication
@@ -60,7 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django.middleware.csrf.CsrfViewMiddleware"
+    "django.middleware.csrf.CsrfViewMiddleware",
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'

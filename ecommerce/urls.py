@@ -4,6 +4,8 @@ from django.contrib import admin
 from django.urls import path , include
 
 urlpatterns = [
+    # django silk package for profiling and url optimization
+    path('silk/', include('silk.urls', namespace='silk')),
     # frontend route file include here
     path('', include('backend.urls')),
     # api route file include here
