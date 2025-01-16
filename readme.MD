@@ -320,8 +320,26 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,                # Blacklist old tokens after rotation
 }
 ```
+### Step-3: DRF Views
+```python
+# Django REST Framework Views Series:
 
-### Step 3: Create URLs for JWT Authentication
+# APIViews - Mainly class based view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class DeleteAllItems(APIView):
+    def get(self, request):
+        #body - other operations
+    
+# api_view() - mainly function based view 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+@api_view(['DELETE'])
+def get(request):
+    # function body
+```
+### Step-4: Create URLs for JWT Authentication
 ```python
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -341,7 +359,7 @@ urlpatterns = [
 # /api/token/verify/: Verify if a token is valid.
 ```
 
-### Step 4: Protect API Endpoints with JWT Authentication
+### Step-5: Protect API Endpoints with JWT Authentication
 ```python
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -358,7 +376,7 @@ class BrandListAPIView(APIView):
         return Response(serializer.data)
 ```
 
-### Step 05: Public Access API Endpoints without JWT Authentication
+### Step-06: Public Access API Endpoints without JWT Authentication
 ```python
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -399,7 +417,7 @@ class ProductDetailsApiView(APIView):
             )
 ```
 
-### Step-06: Django DRF defualt filter library
+### Step-07: Django DRF defualt filter library
 ```python
 install: pip install django-filter
 # first - setup settings file 
@@ -444,7 +462,7 @@ class ProductApiViews(APIView):
             return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 ```
 
-### DRF - Serializer Model Relationship
+###Step-08: DRF - Serializer Model Relationship
 ```python
 #01 => slug related Field
 class AlbumSerializer(serializers.ModelSerializer):
@@ -497,7 +515,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         return album
 ```
 
-### Django-silk = for api profiling and optimization library
+### Step-09: Django-silk = for api profiling and optimization library
 ```python
 #install: pip install django-silk
 
