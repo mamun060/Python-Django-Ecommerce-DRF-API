@@ -589,13 +589,10 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 #Settings 
 MIDDLEWARE_CLASSES = (
-    ...
     'silk.middleware.SilkyMiddleware',
-    ...
 )
 
 INSTALLED_APPS = (
-    ...
     'silk'
 )
 

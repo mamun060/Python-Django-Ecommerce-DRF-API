@@ -7,7 +7,6 @@ from backend.serializers import BrandSerializer
 # Authorization permission assigned 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-
 class BrandListAPIView(APIView):
     permission_classes = [AllowAny]
     def get(self, request):
@@ -17,3 +16,6 @@ class BrandListAPIView(APIView):
                 serializerBrand.data,
                 status=status.HTTP_200_OK
             )
+
+class BrandCreateApiView(APIView ):
+      permission_classes = [AllowAny]
