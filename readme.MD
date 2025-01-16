@@ -284,10 +284,10 @@ urlpatterns = [
 
 ### Django Rest Framework JWT token based authentication and Authorization practice.
 
-### Step-01: install jwt package 
+### install jwt package 
 pip install djangorestframework-simplejwt
 
-### Step 2: Configure Django Settings for JWT Authentication
+### Configure Django Settings for JWT Authentication
 ```python
 # Add 'rest_framework' and 'rest_framework_simplejwt' to your INSTALLED_APPS
 INSTALLED_APPS = [
@@ -320,7 +320,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,                # Blacklist old tokens after rotation
 }
 ```
-### Step-3: DRF Views
+### DRF Views
 ```python
 # Django REST Framework Views Series:
 
@@ -339,7 +339,79 @@ from rest_framework.response import Response
 def get(request):
     # function body
 ```
-### Step-4: Create URLs for JWT Authentication
+### DRF Viewset
+```python
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from myapps.serializers import UserSerializer
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+# viewset example
+class UserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+# Viewset action lists
+class UserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        pass
+    def create(self, request):
+        pass
+    def retrieve(self, request, pk=None):
+        pass
+    def update(self, request, pk=None):
+        pass
+    def partial_update(self, request, pk=None):
+        pass
+    def destroy(self, request, pk=None):
+        pass
+
+#If we need to, we can bind this viewset into two separate views, like so:
+user_list = UserViewSet.as_view({'get': 'list'})
+user_detail = UserViewSet.as_view({'get': 'retrieve'})
+```
+### DRF permission wise api access
+```python
+# first setting DRF permission
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+# class based view permission 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class ExampleView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        content = model.objects.all()
+        return Response(content)
+
+# function based view permission 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def example_view(request, format=None):
+    content = model.objects.all()
+    return Response(content)
+```
+
+### Create URLs for JWT Authentication
 ```python
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -359,7 +431,7 @@ urlpatterns = [
 # /api/token/verify/: Verify if a token is valid.
 ```
 
-### Step-5: Protect API Endpoints with JWT Authentication
+### Protect API Endpoints with JWT Authentication
 ```python
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -376,7 +448,7 @@ class BrandListAPIView(APIView):
         return Response(serializer.data)
 ```
 
-### Step-06: Public Access API Endpoints without JWT Authentication
+### Public Access API Endpoints without JWT Authentication
 ```python
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -417,7 +489,7 @@ class ProductDetailsApiView(APIView):
             )
 ```
 
-### Step-07: Django DRF defualt filter library
+### Django DRF defualt filter library
 ```python
 install: pip install django-filter
 # first - setup settings file 
@@ -462,7 +534,7 @@ class ProductApiViews(APIView):
             return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 ```
 
-###Step-08: DRF - Serializer Model Relationship
+### DRF - Serializer Model Relationship
 ```python
 #01 => slug related Field
 class AlbumSerializer(serializers.ModelSerializer):
@@ -515,7 +587,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         return album
 ```
 
-### Step-09: Django-silk = for api profiling and optimization library
+### Django-silk = for api profiling and optimization library
 ```python
 #install: pip install django-silk
 
