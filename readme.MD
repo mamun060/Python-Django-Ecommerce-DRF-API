@@ -549,7 +549,6 @@ class AlbumSerializer(serializers.ModelSerializer):
         fields = ['album_name', 'artist', 'tracks']
 
 #02=> Nested relationship - example
-#As opposed to previously discussed references to another entity, the referred entity can instead also be embedded or nested in the representation of the object that refers to it. Such nested relationships can be expressed by using serializers as fields. If the field is used to represent a to-many relationship, you should add the many=True flag to the serializer field.
 
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
@@ -563,10 +562,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         model = Album
         fields = ['album_name', 'artist', 'tracks']
 
-
 #03=> Writeable Nested Serializers
-#By default nested serializers are read-only. If you want to support write-operations to a nested serializer field you'll need to create create() and/or update() methods in order to explicitly specify how the child relationships should be saved:
-
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
