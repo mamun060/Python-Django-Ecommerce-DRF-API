@@ -16,7 +16,7 @@ from rest_framework_simplejwt.views import (
 # This urls file use for only api
 urlpatterns = [
     path('brands', brand_api_views.BrandListAPIView.as_view() , name="api-brand-lists"), 
-    path('brand/create', brand_api_views.BrandCreateApiView.as_view() , name="api-brand-lists"), 
+    path('brand/create', brand_api_views.BrandCreateApiView.as_view() , name="api-brand-create"), 
     path('categories', category_api_views.CategoryListAPIViwes.as_view(), name='api-category-lists'),
     path('product', products_api_views.ProductApiViews.as_view(), name="api-product-lists"),
     path('product/<slug:slug>', products_api_views.ProductDetailsApiView.as_view(), name="api-product-details"),

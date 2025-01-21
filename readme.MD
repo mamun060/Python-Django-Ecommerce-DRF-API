@@ -487,6 +487,23 @@ class ProductDetailsApiView(APIView):
                 {"error": "Product Details not found!"},
                 status=status.HTTP_404_NOT_FOUND
             )
+
+    # api create post
+    class BrandCreateApiView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        serializer = BrandSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {
+                    "message": "Brand created successfully",
+                    "brand": serializer.data,
+                },
+                status=status.HTTP_201_CREATED,
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # end create api
 ```
 
 ### Django DRF defualt filter library
