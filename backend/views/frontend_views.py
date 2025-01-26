@@ -6,9 +6,11 @@ from backend.forms import CommentForm
 def home(request):
     categories = Category.objects.all()
     brands = Brand.objects.all()
+    products = Product.objects.all()
     return render(request, 'frontend/home.html',{
         "categories": categories,
-        "brands": brands
+        "brands": brands,
+        "products": products
     })
 
 def about_us(request):

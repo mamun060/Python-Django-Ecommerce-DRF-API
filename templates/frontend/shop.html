@@ -108,12 +108,6 @@
                    <div class="col">
                      <div class="card border shadow-none">
                        <div class="position-relative overflow-hidden">
-                         <div class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                           <!-- <a href="javascript:;"><i class="bi bi-heart"></i></a> -->
-                           <!-- <a href="{% url 'add_to_cart' product.id %}"><i class="bi bi-basket3"></i></a> -->
-                           
-                           <!-- <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewModal"><i class="bi bi-zoom-in"></i></a> -->
-                         </div>
                          <a href="{% url 'product-details' product.slug %}">
                            {% if product.product_thumbnail %}
                             <img src="{{ product.product_thumbnail.url}}" class="card-img-top" alt="{{ product.product_title }}">

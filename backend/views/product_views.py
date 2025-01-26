@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render , get_object_or_404 , redirect
 from backend.models import Category, Product , ProductGallery, Cart, CartItem, Brand
 
-
 def shop(request):
     products = Product.objects.all()
     brands = Brand.objects.all()
