@@ -1,3 +1,9 @@
+superadmin:
+username: superadmin
+email: almamun.dev21@gmail.com
+pass: 12345678
+
+
 test admin:
 user name: mamun
 email: mamun@gmail.com
@@ -6,3 +12,6 @@ password: 12345678
 test customer:
 email: raju@gmail.com
 pass: 12345678
+
+
+pbkdf2_sha256$870000$5tbK00bfseEW3cfYATDN6M$bVgXHur3cDdX5zXRh7mIpGoCDLmdplTJlTmz+bVAb3U=
